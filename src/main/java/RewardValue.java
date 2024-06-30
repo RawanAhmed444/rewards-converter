@@ -1,22 +1,31 @@
 public class RewardValue {
-    private static final double CONVERSION_RATE_TO_CASH = 0.0035;
+    private static final double MILES_TO_CASH_CONVERSION_RATE = 0.0035;
     private final double cashValue;
-    private final double milesValue;
 
+    //If th value was already cash then the constructor will accept it as it is
     public RewardValue(double cashValue) throws IllegalArgumentException {
         if (cashValue < 0) {
             throw new IllegalArgumentException("Cash value cannot be negative.");
         }
         this.cashValue = cashValue;
-        this.milesValue = cashValue / CONVERSION_RATE_TO_CASH;
     }
 
+    //If it was in miles then the constructor will convert it to cash
     public RewardValue(int milesValue) throws IllegalArgumentException {
         if (milesValue < 0) {
             throw new IllegalArgumentException("Miles value cannot be negative.");
         }
-        this.milesValue = milesValue;
-        this.cashValue = milesValue * CONVERSION_RATE_TO_CASH;
+        this.cashValue = convertToCash(milesValue);
+    }
+
+    //Converting from miles to cash
+    private static double convertToCash(int milesValue) {
+        return milesValue * MILES_TO_CASH_CONVERSION_RATE;
+    }
+
+    //Converting from cash to miles
+    private static double convertToMiles(double cashValue) {
+        return (int) (cashValue / MILES_TO_CASH_CONVERSION_RATE);
     }
 
     public double getCashValue() {
@@ -24,6 +33,6 @@ public class RewardValue {
     }
 
     public double getMilesValue() {
-        return milesValue;
+        return convertToMiles(this.cashValue);
     }
 }
