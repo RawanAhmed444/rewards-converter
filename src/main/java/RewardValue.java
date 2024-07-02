@@ -1,5 +1,5 @@
 public class RewardValue {
-    private static final double MILES_TO_CASH_CONVERSION_RATE = 0.0035;
+    public static final double MILES_TO_CASH_CONVERSION_RATE = 0.0035;
     private final double cashValue;
 
     //If th value was already cash then the constructor will accept it as it is
